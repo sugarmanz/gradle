@@ -87,11 +87,6 @@ public class ApplicationPlugin implements Plugin<Project> {
         javaCompile.configure(j -> j.getOptions().getJavaModuleMainClass().convention(pluginExtension.getMainClass()));
     }
 
-    // Enable this back for Gradle 7.0
-    private void configureJarTask(TaskProvider<Jar> jar, JavaApplication pluginExtension) {
-        jar.configure(j -> j.getManifest().attributes(Collections.singletonMap("Main-Class", pluginExtension.getMainClass())));
-    }
-
     private void configureInstallTask(ProviderFactory providers, TaskProvider<Sync> installTask, ApplicationPluginConvention pluginConvention) {
         installTask.configure(task -> task.doFirst(
             "don't overwrite existing directories",
